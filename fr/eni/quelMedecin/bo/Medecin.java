@@ -1,5 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 /**
  * Classe abstraite servant de modele à notre relation d'héritage avec les classes dérivées 
  * Cette classe regroupe les éléments communs à tous les medecins 
@@ -24,7 +26,7 @@ public abstract class Medecin extends Personne implements Soigner{
 	 * @param numeroDeTelephone - numéro de téléphone du medecin
 	 * @param adresse - adresse postale du medecin
 	 */
-	public Medecin(String nom, String prenom, String numeroDeTelephone, Adresse adresse) {
+	public Medecin(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 		creneaux = new Creneau[MAX_CRENEAUX];
 	}

@@ -1,5 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 /**
  * Classe modélisant un médecin généraliste. C'est une specialisation de la classe Medecin
  * Elle ne peut pas etre une généralisation de classes dérivées
@@ -21,7 +23,7 @@ public final class MedecinGeneraliste extends Medecin {
 	 * @param numeroDeTelephone - numéro de téléphone du médecin généraliste
 	 * @param adresse - adresse postale du medecin généraliste
 	 */
-	public MedecinGeneraliste(String nom, String prenom, String numeroDeTelephone, Adresse adresse) {
+	public MedecinGeneraliste(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 	}
 

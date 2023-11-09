@@ -3,6 +3,7 @@ package fr.eni.quelMedecin.test;
 import java.time.LocalDate;
 
 import fr.eni.quelMedecin.bo.*;
+import fr.eni.quelMedecin.exception.UtilisateurException;
 
 public class TestEssentiel {
 
@@ -85,7 +86,7 @@ public class TestEssentiel {
 		} catch (UtilisateurException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		//test numsecu : different de 13 caractères
 		try {
 			Personne paul = new Patient("Dupond", "Paul", "0753428619", 'M', 19211219202014l, LocalDate.of(1992, 11, 21), null, nantes);

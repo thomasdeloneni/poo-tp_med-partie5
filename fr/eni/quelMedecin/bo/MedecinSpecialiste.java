@@ -1,6 +1,8 @@
 package fr.eni.quelMedecin.bo;
 
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 /**
  * Classe modélisant un médecin spécialiste; C'est une specialisation de la classe Medecin
  * Elle ne peut pas etre une généralisation de classes dérivées
@@ -24,17 +26,13 @@ public final class MedecinSpecialiste extends Medecin implements Comparable<Mede
 	 * @param tarif - tarif pratiqué par ce médecin pour une consultation
 	 */
 	public MedecinSpecialiste(String nom, String prenom, String numeroDeTelephone, Adresse adresse, String specialite,
-			int tarif) {
+			int tarif) throws UtilisateurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 		this.setSpecialite(specialite);
 		this.setTarif(tarif);
 	}
 
-	//AUTRES METHODES
-	/** 
-	 * {@inheritDoc}
-	 * @see fr.eni.ecole.quelMedecin3.bo.Personne#afficher()
-	 */
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void afficher() {
@@ -90,8 +88,11 @@ public final class MedecinSpecialiste extends Medecin implements Comparable<Mede
 	 * @param specialite - la specialite du medecin specialiste
 	 * @see MedecinSpecialiste#getSpecialite()
 	 */
-	public void setSpecialite(String specialite) {
-		this.specialite = specialite;
+	public void setSpecialite(String specialite) throws UtilisateurException {
+		if(specialite != null)
+			this.specialite = specialite;
+		else
+			throw new UtilisateurException("la spécialité est obligatoire");
 	}
 
 	/**
@@ -108,8 +109,10 @@ public final class MedecinSpecialiste extends Medecin implements Comparable<Mede
 	 * @param tarif - le tarif de la consultation
 	 * @see MedecinSpecialiste#getTarif()
 	 */
-	public void setTarif(int tarif) {
-		this.tarif = tarif;
+	public void setTarif(int tarif) throws UtilisateurException {
+		if(tarif >25)
+			this.tarif = tarif;
+		else throw new UtilisateurException("le tarif doit être superieur à 25 €");
 	}
 
 }

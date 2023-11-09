@@ -1,5 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 /**
  * Classe modélisant une adresse française en respectant les recommandations de
  * la poste.
@@ -29,7 +31,7 @@ public class Adresse {
 	 * @param cp - code postal
 	 * @param ville - nom de la commune
 	 */
-	public Adresse(String mentionsCompl, int numero, String complNumero, String rue, int cp, String ville) {
+	public Adresse(String mentionsCompl, int numero, String complNumero, String rue, int cp, String ville) throws UtilisateurException {
 		this.setMentionsCompl(mentionsCompl);
 		this.setNumero(numero);
 		this.setComplNumero(complNumero);
@@ -48,7 +50,7 @@ public class Adresse {
 	 * @param cp - code postal
 	 * @param ville - nom de la commune
 	 */
-	public Adresse(int numero, String complNumero, String rue, int cp, String ville) {
+	public Adresse(int numero, String complNumero, String rue, int cp, String ville) throws UtilisateurException {
 		this(null, numero, complNumero, rue, cp, ville);
 	}
 
@@ -121,8 +123,12 @@ public class Adresse {
 	 * @param numero - le numero de la rue
 	 * @see Adresse#getNumero()
 	 */
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setNumero(int numero) throws UtilisateurException {
+		if (numero >0)
+			this.numero = numero;
+		else
+			throw new UtilisateurException("le numéro de la voie doit être strictement positif");
+
 	}
 
 	/**
@@ -157,8 +163,11 @@ public class Adresse {
 	 * @param rue - le nom de la rue
 	 * @see Adresse#getRue()
 	 */
-	public void setRue(String rue) {
-		this.rue = rue;
+	public void setRue(String rue) throws UtilisateurException {
+		if(rue != null)
+			this.rue = rue;
+		else
+			throw new UtilisateurException("le nom de la rue est obligatoire");
 	}
 
 	/**
@@ -175,8 +184,11 @@ public class Adresse {
 	 * @param cp - le code postal
 	 * @see Adresse#getCp()
 	 */
-	public void setCp(int cp) {
-		this.cp = cp;
+	public void setCp(int cp) throws UtilisateurException {
+		if(cp >= 1000 && cp <=99999)
+			this.cp = cp;
+		else
+			throw new UtilisateurException("Le code postal doit être compris entre 1000 et 99999");
 	}
 
 	/**
@@ -193,7 +205,10 @@ public class Adresse {
 	 * @param ville - le nom de la ville
 	 * @see Adresse#getVille()
 	 */
-	public void setVille(String ville) {
-		this.ville = ville;
+	public void setVille(String ville) throws UtilisateurException {
+		if (ville != null)
+			this.ville = ville;
+		else
+			throw new UtilisateurException("le nom de la ville est obligatoire");
 	}
 }
