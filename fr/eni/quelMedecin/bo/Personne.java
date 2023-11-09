@@ -126,7 +126,7 @@ public abstract class Personne {
 	 * @see MedecinGeneraliste#getNom()
 	 */
 	public void setNom(String nom) throws UtilisateurException {
-		if(!nom.isBlank())
+		if(nom!= null && nom.length() > 1 && nom.length()< 100)
 			this.nom = nom;
 		else
 			throw new UtilisateurException("le nom est obligatoire");
@@ -146,8 +146,12 @@ public abstract class Personne {
 	 * @param prenom - le prenom du medecin
 	 * @see MedecinGeneraliste#getPrenom()
 	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setPrenom(String prenom) throws UtilisateurException {
+
+		if(prenom!= null && prenom.length() > 1 && prenom.length()< 100)
+			this.prenom = prenom;
+		else
+			throw new UtilisateurException("le prenom est obligatoire");
 	}
 
 	/**
@@ -165,6 +169,7 @@ public abstract class Personne {
 	 * @see MedecinGeneraliste#getNumeroDeTelephone()
 	 */
 	public void setNumeroDeTelephone(String numeroDeTelephone) {
+
 		this.numeroDeTelephone = numeroDeTelephone;
 	}
 

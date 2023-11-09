@@ -164,7 +164,7 @@ public class Adresse {
 	 * @see Adresse#getRue()
 	 */
 	public void setRue(String rue) throws UtilisateurException {
-		if(rue != null)
+		if(rue != null || !rue.isBlank())
 			this.rue = rue;
 		else
 			throw new UtilisateurException("le nom de la rue est obligatoire");
@@ -206,7 +206,7 @@ public class Adresse {
 	 * @see Adresse#getVille()
 	 */
 	public void setVille(String ville) throws UtilisateurException {
-		if (ville != null)
+		if (ville != null || !ville.isBlank())
 			this.ville = ville;
 		else
 			throw new UtilisateurException("le nom de la ville est obligatoire");
