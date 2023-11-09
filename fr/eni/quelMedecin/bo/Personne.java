@@ -1,5 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 import java.util.Comparator;
 
 /**
@@ -28,7 +30,7 @@ public abstract class Personne {
 	 * @param numeroDeTelephone - numéro de téléphone de la personne
 	 * @param adresse - adresse postale de la personne
 	 */
-	public Personne(String nom, String prenom, String numeroDeTelephone, Adresse adresse) {
+	public Personne(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
 		this.setNom(nom.toUpperCase());
 		this.setPrenom(prenom);
 		this.setNumeroDeTelephone(numeroDeTelephone);
@@ -122,8 +124,11 @@ public abstract class Personne {
 	 * @param nom - le nom du medecin
 	 * @see MedecinGeneraliste#getNom()
 	 */
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNom(String nom) throws UtilisateurException {
+		if(!nom.isBlank())
+			this.nom = nom;
+		else
+			throw new UtilisateurException("le nom est obligatoire");
 	}
 
 	/**

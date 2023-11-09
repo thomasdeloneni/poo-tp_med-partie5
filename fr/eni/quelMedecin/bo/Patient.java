@@ -1,5 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -32,7 +34,7 @@ public class Patient extends Personne {
 	 * @param adresse - adresse postale du patient
 	 */
 	public Patient(String nom, String prenom, String numeroDeTelephone, char sexe, long numSecu,
-			LocalDate dateNaissance, String commentaires, Adresse adresse) {
+			LocalDate dateNaissance, String commentaires, Adresse adresse) throws UtilisateurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 		this.setSexe(sexe);
 		this.setNumSecu(numSecu);
@@ -99,8 +101,11 @@ public class Patient extends Personne {
 	 * @param sexe - le sexe du patient : 'F' pour Féminin ou 'M' pour Masculin
 	 * @see Patient#getSexe()
 	 */
-	public void setSexe(char sexe) {
-		this.sexe = sexe;
+	public void setSexe(char sexe) throws UtilisateurException {
+		if(sexe == 'F' || sexe == 'M')
+			this.sexe = sexe;
+		else
+			throw new UtilisateurException("le sexe doit être 'F' pour Féminin ou 'M' pour Masculin");
 	}
 
 	/**
@@ -117,8 +122,11 @@ public class Patient extends Personne {
 	 * @param numSecu - le numero de secu du patient
 	 * @see Patient#getNumSecu()
 	 */
-	public void setNumSecu(long numSecu) {
-		this.numSecu = numSecu;
+	public void setNumSecu(long numSecu) throws UtilisateurException {
+		if (String.valueOf(numSecu).length() == 13)
+			this.numSecu = numSecu;
+		else
+			throw new UtilisateurException("numéro de Sécurité Sociale doit comporter 13 caractères");
 	}
 
 	/**
@@ -135,8 +143,12 @@ public class Patient extends Personne {
 	 * @param dateNaissance t- la date de naissance du patient
 	 * @see Patient#getNumSecu()
 	 */
-	public void setDateNaissance(LocalDate dateNaissance) {
-		this.dateNaissance = dateNaissance;
+	public void setDateNaissance(LocalDate dateNaissance) throws UtilisateurException {
+		if(dateNaissance != null)
+			this.dateNaissance = dateNaissance;
+		else
+			throw new UtilisateurException("La date de naissance est obligatoire");
+
 	}
 
 	/**
