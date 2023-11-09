@@ -1,5 +1,8 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -28,7 +31,7 @@ public class RendezVous {
 	 * @param patient patient ayant pris rendez-vous
 	 * @param dateRDV date du rendez-vous
 	 */
-	public RendezVous(Creneau creneau, Patient patient, LocalDate dateRDV) {
+	public RendezVous(Creneau creneau, Patient patient, LocalDate dateRDV) throws ProgrammeurException, UtilisateurException {
 		this.setCreneau(creneau);
 		this.setPatient(patient);
 		this.setDateRDV(dateRDV);
@@ -93,8 +96,11 @@ public class RendezVous {
 	 * @param creneau  - le creneau du rendez-vous
 	 * @see RendezVous#getCreneau()
 	 */
-	public void setCreneau(Creneau creneau) {
-		this.creneau = creneau;
+	public void setCreneau(Creneau creneau) throws ProgrammeurException {
+		if (creneau != null)
+			this.creneau = creneau;
+		else
+			throw new ProgrammeurException("instance de type Creneau inexistante");
 	}
 
 	/**
@@ -111,8 +117,11 @@ public class RendezVous {
 	 * @param patient - le patient du rendez-vous
 	 * @see RendezVous#getPatient()
 	 */
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setPatient(Patient patient) throws ProgrammeurException {
+		if (patient !=null)
+			this.patient = patient;
+		else
+			throw new ProgrammeurException("instance de type Patient inexistante");
 	}
 
 	/**
@@ -129,8 +138,11 @@ public class RendezVous {
 	 * @param dateRDV - la date de rendez-vous
 	 * @see RendezVous#getDateRDV()
 	 */
-	public void setDateRDV(LocalDate dateRDV) {
-		this.dateRDV = dateRDV;
+	public void setDateRDV(LocalDate dateRDV) throws UtilisateurException {
+		if(dateRDV.isAfter(LocalDate.now()))
+			this.dateRDV = dateRDV;
+		else
+			throw new UtilisateurException("la date de rendez-vous ne peut pas être antérieure à la date du jour");
 	}	
 	
 }

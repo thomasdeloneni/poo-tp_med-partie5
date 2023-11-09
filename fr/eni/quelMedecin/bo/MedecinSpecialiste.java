@@ -1,6 +1,7 @@
 package fr.eni.quelMedecin.bo;
 
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
 import fr.eni.quelMedecin.exception.UtilisateurException;
 
 /**
@@ -26,7 +27,7 @@ public final class MedecinSpecialiste extends Medecin implements Comparable<Mede
 	 * @param tarif - tarif pratiqué par ce médecin pour une consultation
 	 */
 	public MedecinSpecialiste(String nom, String prenom, String numeroDeTelephone, Adresse adresse, String specialite,
-			int tarif) throws UtilisateurException {
+			int tarif) throws UtilisateurException, ProgrammeurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 		this.setSpecialite(specialite);
 		this.setTarif(tarif);

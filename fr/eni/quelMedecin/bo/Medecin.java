@@ -1,5 +1,6 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
 import fr.eni.quelMedecin.exception.UtilisateurException;
 
 /**
@@ -26,7 +27,7 @@ public abstract class Medecin extends Personne implements Soigner{
 	 * @param numeroDeTelephone - numéro de téléphone du medecin
 	 * @param adresse - adresse postale du medecin
 	 */
-	public Medecin(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
+	public Medecin(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException, ProgrammeurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 		creneaux = new Creneau[MAX_CRENEAUX];
 	}
@@ -52,6 +53,7 @@ public abstract class Medecin extends Personne implements Soigner{
 		for (int i = 0; i < this.creneaux.length; i++)
 			if (this.creneaux[i] != null)
 				this.creneaux[i].afficher();
+		
 	}
 
 	/**
@@ -83,7 +85,7 @@ public abstract class Medecin extends Personne implements Soigner{
 	 * Ajoute un créneau horaire pour ce médecin
 	 * @param creneauAAjouter
 	 */
-	void ajouterCreneau(Creneau creneauAAjouter) {
+	void ajouterCreneau(Creneau creneauAAjouter) throws UtilisateurException {
 		if (this != creneauAAjouter.getMedecin()) {
 			System.err.println("Ce créneau ne peut être associé à ce médecin car il est déjà associé à un autre");
 		} else {
@@ -91,7 +93,7 @@ public abstract class Medecin extends Personne implements Soigner{
 			while (pos < this.creneaux.length && this.creneaux[pos] != null)
 				pos++;
 			if (pos == this.creneaux.length)
-				System.err.println("Trop de créneaux sont affectés à ce médecin");
+				throw new UtilisateurException("Trop de créneaux sont affectés à ce médecin");
 			else
 				this.creneaux[pos] = creneauAAjouter;
 		}

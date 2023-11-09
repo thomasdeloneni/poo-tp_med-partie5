@@ -1,5 +1,8 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
+import fr.eni.quelMedecin.exception.UtilisateurException;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -27,7 +30,7 @@ public class Creneau {
 	 * @param duree - durée du créneau en minutes
 	 * @param medecin - médecin possédant ce créneau
 	 */
-	public Creneau(LocalTime heureDebut, int duree, Medecin medecin) {
+	public Creneau(LocalTime heureDebut, int duree, Medecin medecin) throws UtilisateurException, ProgrammeurException {
 		this.setHeureDebut(heureDebut);
 		this.setDuree(duree);
 		this.setMedecin(medecin);
@@ -113,8 +116,10 @@ public class Creneau {
 	 * @param medecin - le medecin
 	 * @see Creneau#getMedecin()
 	 */
-	public void setMedecin(Medecin medecin) {
-		this.medecin = medecin;
+	public void setMedecin(Medecin medecin) throws ProgrammeurException {
+		if(medecin != null)
+			this.medecin = medecin;
+		else throw new ProgrammeurException("instance de type Medecin inexistante");
 	}
 
 

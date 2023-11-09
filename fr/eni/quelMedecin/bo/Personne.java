@@ -1,5 +1,6 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
 import fr.eni.quelMedecin.exception.UtilisateurException;
 
 import java.util.Comparator;
@@ -30,7 +31,7 @@ public abstract class Personne {
 	 * @param numeroDeTelephone - numéro de téléphone de la personne
 	 * @param adresse - adresse postale de la personne
 	 */
-	public Personne(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
+	public Personne(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException, ProgrammeurException {
 		this.setNom(nom.toUpperCase());
 		this.setPrenom(prenom);
 		this.setNumeroDeTelephone(numeroDeTelephone);
@@ -181,8 +182,11 @@ public abstract class Personne {
 	 * @param adresse - l'adresse du medecin
 	 * @see MedecinGeneraliste#getAdresse()
 	 */
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
+	public void setAdresse(Adresse adresse) throws ProgrammeurException {
+		if(adresse != null)
+			this.adresse = adresse;
+		else
+			throw new ProgrammeurException("instance de type Adresse inexistante");
 	}
 
 	

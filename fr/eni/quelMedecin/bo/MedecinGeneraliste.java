@@ -1,5 +1,6 @@
 package fr.eni.quelMedecin.bo;
 
+import fr.eni.quelMedecin.exception.ProgrammeurException;
 import fr.eni.quelMedecin.exception.UtilisateurException;
 
 /**
@@ -23,15 +24,11 @@ public final class MedecinGeneraliste extends Medecin {
 	 * @param numeroDeTelephone - numéro de téléphone du médecin généraliste
 	 * @param adresse - adresse postale du medecin généraliste
 	 */
-	public MedecinGeneraliste(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException {
+	public MedecinGeneraliste(String nom, String prenom, String numeroDeTelephone, Adresse adresse) throws UtilisateurException, ProgrammeurException {
 		super(nom, prenom, numeroDeTelephone, adresse);
 	}
 
-	//AUTRES METHODES
-	/** 
-	 * {@inheritDoc}
-	 * @see fr.eni.ecole.quelMedecin3.bo.Personne#afficher()
-	 */
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void afficher() {
